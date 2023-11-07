@@ -1,0 +1,291 @@
+//ab_min, ab_maxのalpha, betaカットとvの値を考える
+
+//4/28⓷の分木をもとに(A, D, J, K, V, W, X, Y, その下)
+
+max{//Aを決める
+    alpha=-10000,beta=10000
+    min{//D
+        alpha=-10000,beta=10000
+        max{//J
+            alpha=-10000,beta=10000
+            min{//V
+                alpha=-10000,beta=10000
+                max{//V1
+                    alpha=-10000,beta=10000
+                    //V11
+                    evalation=5(v)
+                    v>alpha : 5>-10000
+                        alpha=5
+                        alpha>=beta : 5>=10000
+                            False
+                    //V12
+                    evalation=6
+                    v>alpha : 6>5
+                        alpha=6
+                        alpha>=beta : 6>=10000
+                            False
+                }v=6
+                v<beta : 6<10000
+                    beta=6
+                    beta<=alpha : 6<=-10000
+                        False
+                max{//V2
+                    alpha=-10000,beta=6
+                    //V21
+                    evalation=7
+                    v>alpha : 7>-10000
+                        alpha=7
+                        alpha>=beta : 7>=6
+                            return beta
+                }v=6
+                v<beta : 6<6
+                    False
+                return beta
+            }v=6
+            v>alpha : 6>-10000
+                alpha=6
+                alpha>=beta : 6>=10000
+                    False
+            min{//W
+                alpha=6,beta=10000
+                max{//W1
+                    alpha=6,beta=10000
+                    //W11
+                    evalation=2
+                    v>alpha : 2>6
+                        False
+                    //W12
+                    evalation=1
+                    v>alpha : 1>6
+                        False
+                    //W13
+                    evalation=6
+                    v>alpha : 6>6
+                        False
+                    return alpha                
+                }v=6
+                v<beta : 6<10000
+                    beta=6
+                    beta<=alpha : 6<=6
+                        return alpha
+            }v=6
+            v>alpha : 6>6
+                False
+            return alpha
+        }v = 6(J)
+        v<beta : 6<10000
+            beta=6
+            beta<=alpha : 6<=-10000
+                False
+        max{//K
+            alpha=-10000,beta=6
+            min{//X
+                alpha=-10000,beta=6
+                max{//X1
+                    alpha=-10000,beta=6
+                    //X11
+                    evalation=3
+                    v>alpha : 3>-10000
+                        alpha=3
+                        alpha>=beta : 3>=6
+                            False
+                    return alpha
+                }v=3
+                v<beta : 3<6
+                    beta=3
+                    beta<=alpha : 3<=-10000
+                        False
+                max{//X2
+                    alpha=-10000,beta=3
+                    //X21
+                    evalation=9
+                    v>alpha : 9>-10000
+                        alpha=9
+                        alpha>=beta : 9>=3
+                            return beta
+                    //X22
+                    evalation=6
+                }v=3
+                v<beta : 3<3
+                    False
+                return beta
+            }v=3(X)
+            min{//Y
+                max{//Y1
+                    //Y11
+                    evalation=7
+                    
+                }
+                max{//Y2
+                    //Y21
+                    evalation=8
+                    
+                    //Y22
+                    evalation=5
+                    
+                }
+                max{//Y3
+                    //Y31
+                    evalation=3
+                    
+                    //Y32
+                    evalation=1
+                    
+                }
+            }
+        }
+    }
+}
+
+//save
+max{//Aを決める
+    min{//D
+        max{//J
+            min{//V
+                max{//V1
+                    //V11
+                    evalation=5
+                    
+
+                    //V12
+                    evalation=6
+                    
+                }
+                max{//V2
+                    //V21
+                    evalation=7
+                    
+                }
+            }
+            min{//W
+                max{//W1
+                    //W11
+                    evalation=2
+                    
+                    //W12
+                    evalation=1
+                    
+                    //W13
+                    evalation=6                    
+                }
+            }
+        }
+        max{//K
+            min{//X
+                max{//X1
+                    //X11
+                    evalation=3
+                    
+                }
+                max{//X2
+                    //X21
+                    evalation=9
+                    
+                    //X22
+                    evalation=6
+                    
+                }
+            }
+            min{//Y
+                max{//Y1
+                    //Y11
+                    evalation=7
+                    
+                }
+                max{//Y2
+                    //Y21
+                    evalation=8
+                    
+                    //Y22
+                    evalation=5
+                    
+                }
+                max{//Y3
+                    //Y31
+                    evalation=3
+                    
+                    //Y32
+                    evalation=1
+                    
+                }
+            }
+        }
+    }
+}
+//save
+max{//Aを決める
+    min{//D
+        max{//J
+            min{//V
+                max{//V1
+                    min{//V11
+                        evalation=5
+                    }
+                    min{//V12
+                        evalation=6
+                    }
+                }
+                max{//V2
+                    min{//V21
+                        evalation=7
+                    }
+                }
+            }
+            min{//W
+                max{//W1
+                    min{//W11
+                        evalation=2
+                    }
+                    min{//W12
+                        evalation=1
+                    }
+                    min{//W13
+                        evalation=6
+                    }
+                }
+            }
+        }
+        max{//K
+            min{//X
+                max{//X1
+                    min{//X11
+                        evalation=3
+                    }
+                }
+                max{//X2
+                    min{//X21
+                        evalation=9
+                    }
+                    min{//X22
+                        evalation=6
+                    }
+                }
+            }
+            min{//Y
+                max{//Y1
+                    min{//Y11
+                        evalation=7
+                    }
+                }
+                max{//Y2
+                    min{//Y21
+                        evalation=8
+                    }
+                    min{//Y22
+                        evalation=5
+                    }
+                }
+                max{//Y3
+                    min{//Y31
+                        evalation=3
+                    }
+                    min{//Y32
+                        evalation=1
+                    }
+                }
+            }
+        }
+    }
+}
+
+

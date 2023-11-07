@@ -1,0 +1,105 @@
+#2023/6/23/9:32最終変更
+
+#////////////////////////////////////////////////////////////////////////////////////////////////////////
+#先読み関数の流れ
+#EvalReverce,isReversed_newMyState()に関しては追記していない
+
+b23m6g26r.C
+・ab_max_FirstTime()
+  makeNextList
+  Save state_save, next_save
+  noCount?
+  pass?
+  Eval_Poly()
+  error_exit()
+  for(next)
+    corner?
+    tmpReverce
+    ab_min
+    Load state_save, next_save
+    if(v > v_save)
+      *x, *y
+      init v_List
+      v_save = v
+    else
+      append v_List
+    
+    alpha_beta
+
+・ab_max
+  makeNextList
+  Save state_save, next_save
+  noCount?  #-> 評価値はない
+  pass?
+    approch 1
+    approch 2
+  I_and_Opp_pass?
+  Eval_Poly()
+  error_exit()
+  if(not pass)  #パスをする際の先読み
+    EvalVal_pass
+    ab_min
+    alpha-beta
+  for(next)  #パスをしない際の先読み
+    pass_consec=0 #パス連続回数の初期化
+    corner?
+    tmpReverce
+    ab_max
+    Load state_save, next_save
+        
+    alpha_beta
+  
+・ab_min
+  makeNextList
+  Save state_save, next_save
+  noCount?  #-> 評価値はない
+  pass?
+  I_and_Opp_pass?
+  Eval_Poly()
+  error_exit()
+  if(not pass)  #パスをする際の先読み
+    EvalVal_pass
+    ab_max
+    alpha-beta
+  for(next)  #パスをしない際の先読み
+    pass_consec=0 #パス連続回数の初期化
+    corner?
+    tmpReverce
+    ab_max
+    Load state_save, next_save
+        
+    alpha_beta
+
+#////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*評価値計30個（どちらかのコマがない際の評価値も含めると31個）
+ 0 Corner,
+ 1 Pass, 
+ 2 getStateMin, 
+ 3 getStateMax, 
+ 4 lookup : edge, 
+ 5          center, 
+ 6          sakai, 
+ 7          inverseSakai, 
+ 8          sakaiCorner, 
+ 9          bros,
+10 lookup_board : edge, 
+11                center, 
+12                sakai, 
+13                inverseSakai, 
+14                sakaiCorner, 
+15                bros,
+16 rateMore50_center,
+17 weight_ifTakeCorner,
+18 rateMore_MyPerEnemy_quadrant,
+19 leaveOne, 
+20 MoreAndLess_spaceAround : more, 
+21                           less, 
+22 MoreAndLess_nextNum : more,
+23                       less,
+24 rate50_board,
+25 overlap_VertivalHorizontalDiagonal : less, 
+26                                      more ?,
+27 take_ExtremeOrHalfWay : more, 
+28                         less,
+29 isReversed_newMyState
+*/
